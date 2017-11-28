@@ -1,0 +1,13 @@
+.wrap{
+  padding: 20px;
+}
+
+.ammount{
+  margin-left: 10px;
+  margin-bottom: 10px;
+  max-width: 40px;
+}
+
+.total>span{
+  font-weight: bolder;
+}

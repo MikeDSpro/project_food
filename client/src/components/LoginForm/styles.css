@@ -1,0 +1,21 @@
+.input_field{
+  height: 82px;
+}
+
+.submit_button{
+  margin-top: 20px;
+}
+
+.wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  
+}
+
+.wrap form {
+  background-color: rgb(240, 238, 238);
+  width: 280px;
+  padding: 10px 10px 10px 20px;
+}

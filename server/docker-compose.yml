@@ -1,0 +1,10 @@
+version: '1.0'
+services:
+  food project:
+    image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+    build: .
+    ports:
+      - 3000:3000

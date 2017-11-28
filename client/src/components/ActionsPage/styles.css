@@ -1,0 +1,12 @@
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px;
+  
+}
+
+.wrap>div{
+  margin-top: 15px;
+}
