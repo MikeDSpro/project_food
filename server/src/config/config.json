@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+      "password": "qwerty",
+      "database": "food",
+      "host": "192.168.99.100",
+      "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+      "password": "qwerty",
+      "database": "food",
+      "host": "192.168.99.100",
+      "dialect": "mysq"
+  },
+  "production": {
+    "username": "process.env.PROD_DB_USERNAME",
+      "password": "process.env.PROD_DB_PASSWORD",
+      "database": "process.env.PROD_DB_NAME",
+      "host": "process.env.PROD_DB_HOSTNAME",
+      "dialect": "mysql"
+  }
+}

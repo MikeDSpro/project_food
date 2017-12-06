@@ -26,7 +26,10 @@ const renderTextField = ({
     {...input}
     {...custom}
   />
+  
+const handleLogin = () => {
 
+}
 
 const LoginForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
