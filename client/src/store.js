@@ -1,20 +1,28 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import {routerMiddleware, push } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
+import { persistStore } from 'redux-persist';
+
+
 import createHistory from 'history/createBrowserHistory';
+import rootSaga from './sagas';
 import reducer from './reducers';
 
-const loggerMW = store => next => action =>{
-  console.log('-->', action);
-  const result = next(action);
-  console.log('store', store.getState());
-  return result;
-};
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const history = createHistory();
+
 const middleware = routerMiddleware(history);
 
 
 export const store = createStore(
-  reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),applyMiddleware(loggerMW, middleware));
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),applyMiddleware(middleware, sagaMiddleware));
 
+export const persistor = persistStore(store);
+
+
+sagaMiddleware.run(rootSaga);
 

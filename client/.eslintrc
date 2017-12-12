@@ -55,8 +55,9 @@
     "no-unused-expressions": "off",
     "no-shadow": "off",
     "no-bitwise": "off",
-    "linebreak-style": ["error", "windows"],
-    "arrow-body-style": ["warn", "always"]
+//    "linebreak-style": ["error", "windows"],
+    "arrow-body-style": ["warn", "always"],
+    "linebreak-style": "off"
   }
 }
 

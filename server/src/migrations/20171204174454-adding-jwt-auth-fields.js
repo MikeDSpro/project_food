@@ -12,7 +12,7 @@ module.exports = {
     },)
       .then(() => bcrypt.hash(pass, saltRounds))
       .then(hash => queryInterface.bulkInsert('users', [{
-        id: 333, firstName: "Admin", lastName: 'Admin', discount: 30, password: pass, hash}])
+        id: 1, firstName: "Admin", lastName: 'Admin', discount: 30, password: pass, hash}])
       )
   },
   down: (queryInterface, Sequelize) => {
