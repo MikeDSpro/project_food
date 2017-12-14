@@ -64,9 +64,7 @@ const fromDecoratorForm = reduxForm({
 
 
 const mapDispatchToProps = {
-
   goTo: push,
-
 };
 
 export default connect(null, mapDispatchToProps)(fromDecoratorForm);

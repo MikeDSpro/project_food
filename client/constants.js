@@ -2,3 +2,9 @@ export const GET_TOKEN = 'GET_TOKEN';
 export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
 export const GET_TOKEN_FAIL = 'GET_TOKEN_FAIL';
 export const SET_TOKEN = 'SET_TOKEN';
+export const USER_LOGOUT = 'USER_LOGOUT';
+
+
+export const GET_ALL_HOMMIES = 'GET_ALL_HOMMIES';
+export const GET_ALL_HOMMIES_SUCCESS = 'GET_ALL_HOMMIES_SUCCESS';
+export const GET_ALL_HOMMIES_FAIL = 'GET_ALL_HOMMIES_FAIL';

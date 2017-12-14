@@ -1,10 +1,20 @@
 import React from 'react';
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 import './styles.css';
 
-const UserRecord = () => {
+const UserRecord = (props) => {
   return(
-      
-      <span className='user_name'>Name Surname</span>
+
+    <MuiThemeProvider>
+        <ListItem
+          primaryText="Brendan Lim"
+          leftAvatar={<Avatar src="" />}
+        />
+    </MuiThemeProvider>
     
   )
 }

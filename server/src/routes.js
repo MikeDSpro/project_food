@@ -23,6 +23,7 @@ router
   .get('/user/', async (ctx, next) => {
     try{
       ctx.body = await User.findAll();
+      console.log(ctx.body)
       return next();
     }catch(e){
       res.body = "Not Found";
@@ -63,10 +64,12 @@ router
       if(!admin) throw new Error('No such user');
       const isPasswordValid = await bcrypt.compare(ctx.request.body.password, admin.hash);
       if(!isPasswordValid) throw new Error("Password is invalid");
-      ctx.body = {
+      const jsonToken = {
         token: jwt.sign({
           user: admin}, jwtsecret)
       };
+      ctx.body = jsonToken.token;
+      console.log(typeof (jsonToken.token))
       return next();
     }catch(e){
       console.log(e);
