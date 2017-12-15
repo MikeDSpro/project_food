@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import sequelize from '../db';
 
-const Hommie = sequelize.define('hommie', {
+const Hommy = sequelize.define('hommy', {
   id: {
     primaryKey: true,
     type: Sequelize.INTEGER,
@@ -14,8 +14,20 @@ const Hommie = sequelize.define('hommie', {
   lastName: {
     type: Sequelize.STRING
   },
+  discount: {
+    type: Sequelize.INTEGER
+  },
+  debt: {
+    type: Sequelize.INTEGER
+  },
+  email: {
+    type: Sequelize.STRING,
+    isEmail: true,
+    unique: true,
+    primaryKey: true,
+  },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
 });
 
-export default Hommie;
+export default Hommy;

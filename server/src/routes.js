@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import jwt from 'jsonwebtoken';
 import User from './models/user';
+import Hommy from './models/hommy';
 import jwtsecret from './config';
 import bcrypt from 'bcrypt';
 
@@ -11,47 +12,45 @@ router
   .get('/health', (ctx, next) => {
       ctx.body = 'Server is running'
   })
-   .get('/user/:id', async (ctx, next) => {
+   .get('/hommy/:id', async (ctx, next) => {
     try{
-    ctx.body = await User.findById(ctx.params.id);
+    ctx.body = await Hommy.findById(ctx.params.id);
     return next();
     }catch(e){
       res.body = "Not Found";
       return next();
     }
   })
-  .get('/user/', async (ctx, next) => {
+  .get('/hommy/', async (ctx, next) => {
     try{
-      ctx.body = await User.findAll();
-      console.log(ctx.body)
+      ctx.body = await Hommy.findAll();
       return next();
     }catch(e){
       res.body = "Not Found";
       return next();
     }
   })
-  .post('/user/', async (ctx, next) => {
+  .post('/hommy/', async (ctx, next) => {
     try{
-
-      ctx.body = await User.create(ctx.request.body);
+      ctx.body = await Hommy.create(ctx.request.body);
       return next();
     }catch (e){
       ctx.body = "Not Found";
       return next();
     }
   })
-  .put('/user/:id', async (ctx, next) => {
+  .put('/hommy/:id', async (ctx, next) => {
     try{
-     ctx.body = await User.update(ctx.request.body, {where: {id: `${ctx.request.body.id}`}});
+     ctx.body = await Hommy.update(ctx.request.body, {where: {id: `${ctx.request.body.id}`}});
      return next();
     }catch(e){
       ctx.body = "Not Found";
       return next();
     }
   })
-  .del('/user/:id', async (ctx, next) => {
+  .del('/hommy/:id', async (ctx, next) => {
     try{
-      ctx.body = await User.destroy({where: {id: ctx.params.id}});
+      ctx.body = await Hommy.destroy({where: {id: ctx.params.id}});
       return next();
     }catch(e){
       ctx.body = "Not Found";
