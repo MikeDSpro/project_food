@@ -18,7 +18,7 @@ function* receiveToken({ payload }) {
 function* getAllHommies() {
   try{
     const response = yield call(getAllUsers);
-    if(response.data.length > 0) {
+    if(response.data.length) {
     yield put(getAllHommiesSuccess(response.data));
     yield put(push('/actions/newday'));
     }

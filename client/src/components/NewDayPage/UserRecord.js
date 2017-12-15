@@ -11,7 +11,7 @@ const UserRecord = (props) => {
 
     <MuiThemeProvider>
         <ListItem
-          primaryText="Brendan Lim"
+          primaryText={props.name}
           leftAvatar={<Avatar src="" />}
         />
     </MuiThemeProvider>

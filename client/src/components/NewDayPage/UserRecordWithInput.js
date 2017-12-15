@@ -4,18 +4,23 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserRecord from './UserRecord';
 
 
-const UserRecordWithInput = () => {
+const UserRecordWithInput = (props) => {
+  {console.log(props)}
   return(
     <MuiThemeProvider>
     <div style={{display:'flex'}}>
       <div style={{alignSelf:'flex-end'}}>
-      <UserRecord />
+      <UserRecord
+        name = {props.name}
+      />
       </div>
       <TextField
+        ref={props.inputRef}
         hintText="Amount Field"
         floatingLabelText="Amount"
         type="number"
-        defaultValue='30'
+        defaultValue={props.defVal}
+        onChange={ ({target}) => props.changeValue(target.value, props.id )}
         min={0}
         max={99}
         style={{width:'50px'}}

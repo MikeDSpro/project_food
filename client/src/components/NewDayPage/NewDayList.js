@@ -1,34 +1,38 @@
-import React from 'react';
 import {connect} from 'react-redux';
-import UserRecordWithInput from './UserRecordWithInput';
+import React from 'react';
+import {changeValue} from '../../actions';
+import HommiesList from './HommiesList';
 
 
-class NewDayList extends React.Component{
-  constructor(props){
-    super(props);
-  }
+class NewDayList extends React.Component {
 
-render(){
-  const {hommies} = this.props;
-  console.log(hommies);
+  render(){
+
+  const {hommies, total, changeValue} = this.props;
+
   const utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
   return(
     <div className='wrap'>
       <h2>Today's Food Order</h2>
       <h4>{utc}</h4>
-    <UserRecordWithInput />
-    <UserRecordWithInput />
-    <div className='total'>Total: <span>555</span></div>
+      <HommiesList
+        hommies ={hommies}
+        changeValue = {changeValue}
+      />
+
+      <div className='total'>Total: <span>{total}</span></div>
     </div>
   );
+}}
+
+const mapDispatchToProps = {
+  changeValue
 }
 
-}
+const mapStateToProps = ({hommies}) => ({
+    hommies: hommies.hommies,
+    total: hommies.Gtotal
+});
 
-const mapStateToProps =(state) => {
-  return {
-    hommies: state.hommies
-  };
-};
-
-export default connect(mapStateToProps)(NewDayList);
+export default connect(mapStateToProps, mapDispatchToProps)(NewDayList);
