@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import jwt from 'jsonwebtoken';
 import User from './models/user';
 import Hommy from './models/hommy';
+import Day from './models/day';
 import jwtsecret from './config';
 import bcrypt from 'bcrypt';
 
@@ -32,10 +33,13 @@ router
   })
   .post('/hommy/', async (ctx, next) => {
     try{
-      ctx.body = await Hommy.create(ctx.request.body);
-      return next();
+      const hommy = await Hommy.create(ctx.request.body);
+      const email = hommy.email;
+      const lastCreated = await Hommy.findOne({where: {email:email}});
+      ctx.body = lastCreated;
+       return next();
     }catch (e){
-      ctx.body = "Not Found";
+      ctx.body = "Can't create new Hommmy";
       return next();
     }
   })
@@ -50,6 +54,7 @@ router
   })
   .del('/hommy/:id', async (ctx, next) => {
     try{
+      console.log(ctx.body)
       ctx.body = await Hommy.destroy({where: {id: ctx.params.id}});
       return next();
     }catch(e){
@@ -77,11 +82,18 @@ router
       return next();
     }
   })
-  .post('/auth/', async(ctx, next) => {
+  .post('/actions/newday/closeday', async (ctx, next) => {
     try{
-      
-    }catch(e){
-      
+      const currentDay = await Day.findOne({where: {createdAt: ctx.request.body.date}});
+      if(!currentDay){
+        ctx.body = await Day.create(ctx.request.body);
+      }
+      ctx.body = await Day.update(ctx.request.body, {where: {createdAt: `${ctx.request.body.date}`}});
+
+      return next();
+    }catch (e){
+      ctx.body = "Can't close the day";
+      return next();
     }
   })
   .all('/user/:id', function (ctx, next) {

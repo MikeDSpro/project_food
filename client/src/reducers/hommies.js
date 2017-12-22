@@ -1,7 +1,8 @@
-import {GET_ALL_HOMMIES_SUCCESS, GET_ALL_HOMMIES_FAIL, CHANGE_VALUE} from '../../constants';
+import {GET_ALL_HOMMIES_SUCCESS, GET_ALL_HOMMIES_FAIL, CHANGE_VALUE, ADD_HOMMY_SUCCESS, DELETE_HOMMY_SUCCESS, LOAD_HOMMY_DATA, EDIT_HOMMY_SUCCESS} from '../../constants';
 
-const hommies = (state = {
-  hommies: [], Gtotal: 0,
+
+const list = (state = {
+  hommies: [], Gtotal: 0, hommyData:{}
 }, action) =>{
 
   switch (action.type){
@@ -9,7 +10,7 @@ const hommies = (state = {
     case GET_ALL_HOMMIES_SUCCESS: return {...state, hommies:
       action.payload.map((item)=>({
         ...item,
-        total: 30
+        total: 0
       })),
       Gtotal: state.hommies.reduce((prev, { total })=> prev + total, 0)
     } ;
@@ -25,8 +26,21 @@ const hommies = (state = {
       Gtotal: state.hommies.reduce((prev, { total })=> prev + +total, 0)
     };
 
+    case ADD_HOMMY_SUCCESS: return {
+      ...state, hommies: [ ...state.hommies, action.payload ]
+    };
+
+    case DELETE_HOMMY_SUCCESS: return {
+      ...state, hommies: [...state.hommies.filter(hom => hom.id !== action.payload) ]
+    };
+
+    case LOAD_HOMMY_DATA: return {
+      ...state, hommyData: [...state.hommies.filter(hom => hom.id === action.payload)]
+    };
+
     default: return state;
   }
 };
 
-export default hommies;
+export default list;
+

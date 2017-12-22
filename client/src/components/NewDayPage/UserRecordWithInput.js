@@ -5,13 +5,13 @@ import UserRecord from './UserRecord';
 
 
 const UserRecordWithInput = (props) => {
-  {console.log(props)}
   return(
     <MuiThemeProvider>
     <div style={{display:'flex'}}>
       <div style={{alignSelf:'flex-end'}}>
       <UserRecord
-        name = {props.name}
+        firstName = {props.firstName}
+        lastName={props.lastName}
       />
       </div>
       <TextField
@@ -20,7 +20,7 @@ const UserRecordWithInput = (props) => {
         floatingLabelText="Amount"
         type="number"
         defaultValue={props.defVal}
-        onChange={ ({target}) => props.changeValue(target.value, props.id )}
+        onChange={({target}) => props.changeValue(target.value, props.id )}
         min={0}
         max={99}
         style={{width:'50px'}}

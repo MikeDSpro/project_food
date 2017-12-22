@@ -18,17 +18,16 @@ const getHeaders = () => {
   return null;
 };
 
-
-export const getAllUsers =() => axios.get(`${baseUrl}user/`, getHeaders());
-
+export const getAllHommies =() => axios.get(`${baseUrl}hommy/`, getHeaders());
 
 export const login = (params) => axios.post(`${baseUrl}auth/login`, params);
-export const getUser = (id) => axios.get(`${baseUrl}user/${id}`);
+export const getHommy = (id) => axios.get(`${baseUrl}hommy/${id}`, getHeaders());
+
+export const deleteHommy = (id) => axios.delete(`${baseUrl}hommy/${id}`, getHeaders());
 
 
-export const deleteUser = (id) => axios.delete(`${baseUrl}user/${id}`);
-export const editUser = (id) => axios.put(`${baseUrl}user/${id}`);
-export const addUser = (params) => axios.post(`${baseUrl}user`, params);
+export const editHommy = ({id, params}) => axios.put(`${baseUrl}hommy/${id}`, {id, params}, getHeaders());
+export const addHommy = (params) => axios.post(`${baseUrl}hommy/`, params, getHeaders());
 
 
 

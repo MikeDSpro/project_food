@@ -1,13 +1,13 @@
 import {call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import {login, getAllUsers} from '../api/requests';
-import {getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail} from '../actions';
-import {GET_TOKEN, GET_ALL_HOMMIES} from '../../constants';
+import {login, getAllHommies, addHommy, deleteHommy, editHommy, getHommy} from '../api/requests';
+import {getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess, editHommySuccess} from '../actions';
+import {GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY, EDIT_HOMMY} from '../../constants';
+
 
 function* receiveToken({ payload }) {
   try{
     const response = yield call(login, payload);
-    console.log(response.data);
     yield put(getTokenSuccess(response.data));
     yield put(push('/actions'));
   }catch(e){
@@ -15,25 +15,49 @@ function* receiveToken({ payload }) {
   }
 }
 
-function* getAllHommies() {
+function* getAll() {
   try{
-    const response = yield call(getAllUsers);
+    const response = yield call(getAllHommies);
     if(response.data.length) {
     yield put(getAllHommiesSuccess(response.data));
-    yield put(push('/actions/newday'));
     }
     // throw new Error('Unable to fetch hommies');
-
   }catch(e){
     yield put(getAllHommiesFail(e))
   }
 }
 
+function* addNewHommy ({payload}) {
+  try{
+
+    const response = yield call(addHommy, payload);
+
+    yield put (addHommySuccess(response.data));
+
+    }catch (e){
+    // todo: add error handler
+  }
+}
+
+function* deleteOneHommy({payload}) {
+  try{
+    yield call(deleteHommy, payload);
+    yield put(deleteHommySuccess(payload))
+  }catch(e){
+    // todo: add error handler
+  }
+}
+
+function* editOneHommy () {
+
+}
 
 function* rootSaga() {
   yield* [
     takeLatest(GET_TOKEN, receiveToken),
-    takeLatest(GET_ALL_HOMMIES, getAllHommies)
+    takeLatest(GET_ALL_HOMMIES, getAll),
+    takeLatest(ADD_HOMMY, addNewHommy),
+    takeLatest(DELETE_HOMMY, deleteOneHommy),
   ]
 }
 
