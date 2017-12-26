@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import UserRecord from './UserRecord';
+import UserRecord from './UserRecord___';
 
 
 const UserRecordWithInput = (props) => {

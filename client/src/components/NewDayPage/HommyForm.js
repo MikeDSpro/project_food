@@ -3,14 +3,13 @@ import { Field, reduxForm, } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import { push } from 'react-router-redux';
 import {connect} from 'react-redux';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './styles.css';
 import validate from '../LoginForm/validate';
-//import { addHommy } from '../../actions'; //  Todo: remake to save
-import {editHommy, editHommySuccess, loadHommyData} from '../../actions';
+
+import {editHommy} from '../../actions';
 
 const renderTextField = ({
                            input,
@@ -24,18 +23,17 @@ const renderTextField = ({
     errorText={touched && error}
     {...input}
     {...custom}
-  />
+  />;
 
 
 const HommyForm = (props) => {
-  console.log('--->', props)
 
   const { handleSubmit, pristine, reset, submitting, error, closeModalOnAdd, closeDialogOnDelete, closeEdit, load } = props;
 
   const handleAdd = (e) =>{
     e.preventDefault();
     handleSubmit();
-    closeModalOnAdd();
+    closeEdit();
   };
 
   return(
@@ -56,16 +54,12 @@ const HommyForm = (props) => {
             <RaisedButton type="submit" primary disabled={pristine || submitting}>
               SAVE
             </RaisedButton>
-            <RaisedButton primary onClick={closeEdit}>
+            <RaisedButton primary onClick={ closeEdit }>
               CANCEL
             </RaisedButton>
             <RaisedButton secondary onClick={ closeDialogOnDelete }>
               DELETE
             </RaisedButton>
-            <RaisedButton secondary onClick={ () => load(props.id) }>
-              LOAD
-            </RaisedButton>
-
           </div>
 
         </form>
@@ -76,9 +70,10 @@ const HommyForm = (props) => {
 
 const fromDecoratorForm = reduxForm({
   form: 'AddHommyForm',
-  // onSubmit: (values, dispatch) => {
-  //   dispatch(addHommy(values))
-  // },
+  onSubmit: (values, dispatch) => {
+    dispatch(editHommy(values));
+    console.log('VALUES', values)
+  },
   enableReinitialize: true,
   validate,
 })(HommyForm);
@@ -86,7 +81,7 @@ const fromDecoratorForm = reduxForm({
 
 const mapDispatchToProps = {
   goTo: push,
-  load: loadHommyData,
+
 };
 
 export default connect((state, ownProps) => {

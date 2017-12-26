@@ -34,8 +34,8 @@ const list = (state = {
       ...state, hommies: [...state.hommies.filter(hom => hom.id !== action.payload) ]
     };
 
-    case LOAD_HOMMY_DATA: return {
-      ...state, hommyData: [...state.hommies.filter(hom => hom.id === action.payload)]
+    case EDIT_HOMMY_SUCCESS: return {
+      ...state, hommies: [...state.hommies.map((hom) => hom.id === action.payload.id ? action.payload : hom)]
     };
 
     default: return state;

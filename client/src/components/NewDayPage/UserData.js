@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
+
 import HommyForm from './HommyForm';
 
 const UserData = (props) => {
@@ -8,7 +8,6 @@ const UserData = (props) => {
     <div>
       <HommyForm
         id = {props.id}
-       // loadHommyData={props.loadHommyData}
         closeEdit={props.closeEdit}
         closeDialogOnDelete={props.closeDialogOnDelete}/>
     </div>

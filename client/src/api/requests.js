@@ -26,7 +26,7 @@ export const getHommy = (id) => axios.get(`${baseUrl}hommy/${id}`, getHeaders())
 export const deleteHommy = (id) => axios.delete(`${baseUrl}hommy/${id}`, getHeaders());
 
 
-export const editHommy = ({id, params}) => axios.put(`${baseUrl}hommy/${id}`, {id, params}, getHeaders());
+export const editHommyApi = (params) => axios.put(`${baseUrl}hommy/${params.id}`, params, getHeaders());
 export const addHommy = (params) => axios.post(`${baseUrl}hommy/`, params, getHeaders());
 
 

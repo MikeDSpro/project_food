@@ -1,6 +1,6 @@
 import {call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import {login, getAllHommies, addHommy, deleteHommy, editHommy, getHommy} from '../api/requests';
+import {login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy} from '../api/requests';
 import {getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess, editHommySuccess} from '../actions';
 import {GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY, EDIT_HOMMY} from '../../constants';
 
@@ -28,10 +28,9 @@ function* getAll() {
 }
 
 function* addNewHommy ({payload}) {
+
   try{
-
     const response = yield call(addHommy, payload);
-
     yield put (addHommySuccess(response.data));
 
     }catch (e){
@@ -39,7 +38,20 @@ function* addNewHommy ({payload}) {
   }
 }
 
+function* hommyEdit({payload}) {
+  console.log('SAVE values ==>', payload)
+  try{
+    const response = yield call(editHommyApi, payload);
+    console.log(response.data)
+    yield put (editHommySuccess(response.data));
+
+  }catch(e){
+    // todo: add error handler
+  }
+}
+
 function* deleteOneHommy({payload}) {
+  console.log(payload)
   try{
     yield call(deleteHommy, payload);
     yield put(deleteHommySuccess(payload))
@@ -48,9 +60,7 @@ function* deleteOneHommy({payload}) {
   }
 }
 
-function* editOneHommy () {
 
-}
 
 function* rootSaga() {
   yield* [
@@ -58,6 +68,7 @@ function* rootSaga() {
     takeLatest(GET_ALL_HOMMIES, getAll),
     takeLatest(ADD_HOMMY, addNewHommy),
     takeLatest(DELETE_HOMMY, deleteOneHommy),
+    takeLatest(EDIT_HOMMY, hommyEdit)
   ]
 }
 

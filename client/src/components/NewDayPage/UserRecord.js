@@ -1,46 +1,65 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Avatar from 'material-ui/Avatar';
 import {List, ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import SkyLight from 'react-skylight';
+
 import RaisedButton from 'material-ui/RaisedButton';
+
+import ReactModal from 'react-modal';
 import UserData from './UserData';
 import './styles.css';
-import styles from "../Modal/modalStyles";
+
+
+ReactModal.setAppElement('#root');
 
 class UserRecord extends React.Component {
 
-  closeDialogOnDelete = () => {
-    this.props.deleteHommy();
-    this.simpleDialog.hide();
+  constructor () {
+    super();
+    this.state = {
+      showModal: false
+    };
   }
 
-  render(){
+  closeDialogOnDelete = () => {
+    this.props.deleteHommy();
+    this.hideModal();
+  };
+
+  hideModal = () => {
+    this.setState({showModal: false});
+  };
+
+  showModal = () => {
     return(
+      <ReactModal
+        isOpen
+        contentLabel="onRequestClose Example"
+        onRequestClose={this.handleCloseModal}
+      >
+        <UserData
+          id={this.props.id}
+          closeEdit={this.hideModal}
+          closeDialogOnDelete={this.closeDialogOnDelete}/>
+      </ReactModal>
+    )
+  };
 
-    <MuiThemeProvider>
-      <div>
-        <ListItem onClick={() => this.simpleDialog.show()}
-          primaryText={`${this.props.firstName} ${this.props.lastName}`}
-          leftAvatar={<Avatar src="" />}
+  render(){
+     return(
 
-        />
-         <SkyLight
-          closeButtonStyle={styles.closeButtonStyle}
-          dialogStyles={styles.dialogStyles}
-          hideOnOverlayClicked
-          ref={ref => {this.simpleDialog = ref}}
-          title='Hommie about'
-          >
-           <UserData
-             id={this.props.id}
-             closeEdit={() => this.simpleDialog.hide()}
-             closeDialogOnDelete={this.closeDialogOnDelete}/>
+      <MuiThemeProvider>
+        <div>
+          <ListItem onClick={() => this.setState({ showModal:true})}
+                    primaryText={`${this.props.firstName} ${this.props.lastName}`}
+                    leftAvatar={<Avatar src="" />}
+                    >
+            {this.state.showModal && this.showModal()}
 
-           </SkyLight>
-      </div>
-    </MuiThemeProvider>
-  )
+          </ListItem>
+        </div>
+      </MuiThemeProvider>
+    )
   }
 }
 

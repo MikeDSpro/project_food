@@ -1,7 +1,7 @@
 import {
   GET_TOKEN, GET_TOKEN_FAIL, GET_TOKEN_SUCCESS, SET_TOKEN, USER_LOGOUT, GET_ALL_HOMMIES, GET_ALL_HOMMIES_SUCCESS,
   GET_ALL_HOMMIES_FAIL,
-  CHANGE_VALUE, LOAD_HOMMY_DATA,
+  CHANGE_VALUE,
   EDIT_HOMMY, DELETE_HOMMY, ADD_HOMMY, ADD_HOMMY_SUCCESS, DELETE_HOMMY_SUCCESS, EDIT_HOMMY_SUCCESS,
 
 } from "../../constants";
@@ -61,14 +61,11 @@ export const deleteHommySuccess = (id) => {
   return {type: DELETE_HOMMY_SUCCESS, payload: id}
 };
 
-export const editHommy = ({id, payload}) => {
-  return {type: EDIT_HOMMY, payload: {id, payload}}
+export const editHommy = (params) => {
+  return {type: EDIT_HOMMY, payload: params}
 };
 
-export const editHommySuccess = ({id, payload}) => {
-  return {type: EDIT_HOMMY_SUCCESS, payload: {id, payload}}
+export const editHommySuccess = (params) => {
+  return {type: EDIT_HOMMY_SUCCESS, payload: params}
 };
 
-export const loadHommyData = (id) => {
-  return {type: LOAD_HOMMY_DATA, payload: id}
-};
