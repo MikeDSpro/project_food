@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { push } from 'react-router-redux';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {connect} from 'react-redux';
@@ -53,8 +52,6 @@ render(){
   )
 }
 };
-
-
 
 const mapStateToProps = ({hommies}) => {
   return {hommies}

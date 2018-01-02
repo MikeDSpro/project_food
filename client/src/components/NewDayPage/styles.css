@@ -37,8 +37,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
-
 }
 
 .wrap form {
@@ -47,19 +45,19 @@
   padding: 0px 10px 10px 10px;
 }
 
-
-
-
-
 .wrap{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   padding: 25px;
-
 }
 
 .wrap>div{
   margin-top: 15px;
+}
+
+.list_element {
+  align-self:flex-end;
+  width: 350px;
 }

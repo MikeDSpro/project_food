@@ -2,7 +2,11 @@ import {
   GET_TOKEN, GET_TOKEN_FAIL, GET_TOKEN_SUCCESS, SET_TOKEN, USER_LOGOUT, GET_ALL_HOMMIES, GET_ALL_HOMMIES_SUCCESS,
   GET_ALL_HOMMIES_FAIL,
   CHANGE_VALUE,
-  EDIT_HOMMY, DELETE_HOMMY, ADD_HOMMY, ADD_HOMMY_SUCCESS, DELETE_HOMMY_SUCCESS, EDIT_HOMMY_SUCCESS,
+  EDIT_HOMMY, DELETE_HOMMY,
+  ADD_HOMMY, ADD_HOMMY_SUCCESS,
+  DELETE_HOMMY_SUCCESS, EDIT_HOMMY_SUCCESS,
+  CLOSE_DAY_SUCCESS,
+  CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS,
 
 } from "../../constants";
 
@@ -68,4 +72,19 @@ export const editHommy = (params) => {
 export const editHommySuccess = (params) => {
   return {type: EDIT_HOMMY_SUCCESS, payload: params}
 };
+//  /////////////////////////////////////
+export const closeDay = (params) => {
+  return {type: CLOSE_DAY, payload: params}
+};
 
+export const closeDaySuccess = (params) => {
+  return {type: CLOSE_DAY_SUCCESS, payload: params}
+};
+
+export const saveValue = (params) => {
+  return {type: SAVE_VALUE, payload: params}
+};
+
+export const saveValueSuccess = (params) => {
+  return {type: SAVE_VALUE_SUCCESS, payload: params}
+};
