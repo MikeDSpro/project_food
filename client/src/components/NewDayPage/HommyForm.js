@@ -28,7 +28,7 @@ const renderTextField = ({
 
 const HommyForm = (props) => {
 
-  const { handleSubmit, pristine, reset, submitting, error, closeModalOnAdd, closeDialogOnDelete, closeEdit, load } = props;
+  const { handleSubmit, pristine, reset, submitting, error, closeDialogOnDelete, closeEdit, load } = props;
 
   const handleAdd = (e) =>{
     e.preventDefault();
@@ -48,6 +48,9 @@ const HommyForm = (props) => {
           </div>
           <div className='input_field'>
             <Field type="email" name="email" component={renderTextField} label="Email" />
+          </div>
+          <div className='input_field'>
+            <Field name="debt" component={renderTextField} label="Debt" disabled/>
           </div>
           <div className='submit_button'>
             {error && <strong>{error}</strong>}

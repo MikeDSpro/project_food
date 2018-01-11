@@ -25,7 +25,15 @@ export const CLOSE_DAY_SUCCESS = "CLOSE_DAY_SUCCESS";
 export const SAVE_VALUE = "SAVE_VALUE";
 export const SAVE_VALUE_SUCCESS = "SAVE_VALUE_SUCCESS";
 
+export const GET_DAY_AMOUNT = "GET_DAY_AMOUNT";
+export const GET_DAY_AMOUNT_SUCCESS = "GET_DAY_AMOUNT_SUCCESS";
 
+export const RESET_AMOUNT = "RESET_AMOUNT";
+
+export const GET_AMOUNT = "GET_AMOUNT";
+export const GET_AMOUNT_SUCCESS = "GET_AMOUNT_SUCCESS";
+
+export const SET_AMOUNTS = "SET_AMOUNTS";
 
 
 

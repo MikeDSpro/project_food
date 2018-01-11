@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const baseUrl = `http://localhost:3001/`;
 
-
 const getHeaders = () => {
   if (window.localStorage.getItem('persist:root')) {
     const data = JSON.parse(window.localStorage.getItem('persist:root'));
@@ -31,3 +30,8 @@ export const addHommy = (params) => axios.post(`${baseUrl}hommy/`, params, getHe
 
 export const closeNewDay = (params) => axios.post(`${baseUrl}actions/newday/closeday`, params, getHeaders());
 
+export const getAmounts = () => axios.get(`${baseUrl}hommy/`, getHeaders());
+
+export const getAmount = (params) => axios.post(`${baseUrl}hommy/amount`, params, getHeaders());
+
+export const setHommiesAmount = () => axios.post(`${baseUrl}hommy/`, getHeaders());

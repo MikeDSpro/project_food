@@ -5,7 +5,9 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage';
 import login from './user';
 import list from './hommies';
-import {ADD_HOMMY_SUCCESS, LOAD_HOMMY_DATA, CLEAR_FORM_FIELDS} from '../../constants';
+import total from './total';
+import dayAmount from './dayAmount';
+import {ADD_HOMMY_SUCCESS} from '../../constants';
 import dayReducer from './day';
 
 const config = {
@@ -17,13 +19,12 @@ const getHommies = {
   storage,
 };
 
-const reducer = combineReducers({           // Clear form
-  form: formReducer.plugin({
+const reducer = combineReducers({
+  form: formReducer.plugin({                    // Clear form
     AddHommyForm: (state, action) => {
       switch(action.type) {
         case ADD_HOMMY_SUCCESS:
           return undefined;
-
         default:
           return state;
       }
@@ -31,8 +32,8 @@ const reducer = combineReducers({           // Clear form
   }),
   routing: routerReducer,
   setToken: persistReducer(config, login),
-  hommies: persistReducer(getHommies, list),
-  dayReducer,
+  hommies: list, // persistReducer(getHommies, list),
+  dayReducer, total, dayAmount,
 });
 
 

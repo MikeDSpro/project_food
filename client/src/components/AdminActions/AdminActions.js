@@ -4,32 +4,36 @@ import {push} from "react-router-redux";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import HommiesList from './HommiesList';
-import AddHommyForm from './AddHommyForm';
-import {deleteHommy, loadHommyData} from "../../actions";
+import {deleteHommy, getAllHommies} from "../../actions";
 import Modal from '../Modal';
 import './styles.css';
 
 
-const AdminActions = (props) =>{
-const {push, deleteHommy, hommies} = props;
+class AdminActions extends React.Component{
+
+  componentDidMount = () => {
+    this.props.getAllHommies();
+  };
+
+render(){
+  const {push, deleteHommy, hommies} = this.props;
   return(
     <MuiThemeProvider>
       <div className='wrap'>
+        <h1>Admin's Actions</h1>
         <Modal/>
-          <div>
-          <RaisedButton onClick = {() => {push('/actions')}}>Go Back</RaisedButton>
-        </div>
+        <RaisedButton onClick = {() => {push('/actions')}}>Go Back</RaisedButton>
         <HommiesList hommies={hommies}
-        deleteHommy={deleteHommy}
-        loadHommyData={loadHommyData}/>
+                     deleteHommy={deleteHommy}
+        />
       </div>
     </MuiThemeProvider>
   )
-};
-
+}
+}
 
 const mapStateToProps = ({hommies}) => {
   return hommies
 };
 
-export default connect(mapStateToProps, {push, deleteHommy, loadHommyData})(AdminActions);
+export default connect(mapStateToProps, {push, deleteHommy, getAllHommies})(AdminActions);

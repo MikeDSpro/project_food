@@ -1,9 +1,16 @@
-import {call, put, takeEvery, takeLatest, select, fork} from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest, select, fork} from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
-import {login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy, closeNewDay} from '../api/requests';
-import {getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess, editHommySuccess, closeDaySuccess} from '../actions';
-import {GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY, EDIT_HOMMY, CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS} from '../../constants';
-import {getHommies} from "../selectors";
+import { login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy, closeNewDay, getAmount} from '../api/requests';
+import {
+  getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess,
+  editHommySuccess, closeDaySuccess, getDayAmountSuccess,
+} from '../actions';
+import {
+  GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY,
+  EDIT_HOMMY, CLOSE_DAY, GET_AMOUNT,
+} from '../../constants';
+
 
 
 function* receiveToken({ payload }) {
@@ -18,18 +25,19 @@ function* receiveToken({ payload }) {
 
 function* getAll() {
   try{
-    const response = yield call(getAllHommies);
-    if(response.data.length) {
-      yield put(getAllHommiesSuccess(response.data));
+    yield delay(500);
+    const {data} = yield call(getAllHommies);
+
+       if(data.length) {
+       yield put(getAllHommiesSuccess(data));
     }
-    // throw new Error('Unable to fetch hommies');
+     // throw new Error('Unable to fetch hommies');
   }catch(e){
     yield put(getAllHommiesFail(e))
   }
 }
 
 function* addNewHommy ({payload}) {
-
   try{
     const response = yield call(addHommy, payload);
     yield put (addHommySuccess(response.data));
@@ -40,7 +48,6 @@ function* addNewHommy ({payload}) {
 }
 
 function* hommyEdit({payload}) {
-
   try{
     const response = yield call(editHommyApi, payload);
     yield put (editHommySuccess(response.data));
@@ -63,7 +70,7 @@ function* deleteOneHommy({payload}) {
 
 function* dayClose({payload}) {
   try{
-   console.log(payload);
+
    const response = yield call(closeNewDay, payload);
 
   }catch (e){
@@ -71,16 +78,28 @@ function* dayClose({payload}) {
   }
 }
 
-function* saveDay ({payload}) {
+function* getHommiesAmount({payload}) {
   try{
-    const hommies = yield select(getHommies);
-   // const response = yield call();
+    const response = yield call(getAmount, payload);
+    console.log(response)
 
-
-  } catch(e){
-    // todo:
+  }catch(e){
+    console.log(e)
   }
 }
+
+// function* getAmount () {
+//   try{
+//     const response = yield call(getAmounts);
+//     const total = response.data.amounts.reduce((acc, { amount }) => {
+//       return acc + amount
+//     },0);
+//     yield put (getDayAmountSuccess(response));
+//   } catch(e){
+//     // todo:
+//   }
+// }
+
 
 function* rootSaga() {
   yield* [
@@ -90,7 +109,7 @@ function* rootSaga() {
     takeLatest(DELETE_HOMMY, deleteOneHommy),
     takeLatest(EDIT_HOMMY, hommyEdit),
     takeLatest(CLOSE_DAY, dayClose),
-    // takeLatest(SAVE_VALUE, saveDay),
+    takeLatest(GET_AMOUNT, getHommiesAmount),
      ]
 }
 

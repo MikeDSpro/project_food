@@ -9,16 +9,12 @@ import {userLogout, getAllHommies} from '../../actions';
 
 class ActionsPage extends Component{
 
-  componentDidMount(){
-    this.props.getAllHommies();
-  }
-
   logout = () => {
     this.props.userLogout();
     this.props.push('/');           //  Todo: Move to saga
   };
 
- renderNewDay = () => {
+  renderNewDay = () => {
     this.props.push('actions/newday');
   };
 
@@ -26,14 +22,13 @@ class ActionsPage extends Component{
     this.props.push('actions/admin');
   };
 
-
 render(){
   const {push} = this.props;
   return(
     <MuiThemeProvider>
       <div className = 'wrap'>
         <div>
-          <RaisedButton onClick = {() => {this.renderNewDay()}} primary>New Day</RaisedButton>
+          <RaisedButton onClick = {() => {this.renderNewDay()}} primary>Current Day</RaisedButton>
         </div>
         <div>
           <RaisedButton onClick = {() => {push('/actions/reports')}} primary>Reports</RaisedButton>

@@ -4,7 +4,7 @@ import UserRecord from '../NewDayPage/UserRecord';
 const HommiesList = (props) => {
 
   const {hommies, deleteHommy, loadHommyData} = props;
-  console.log(hommies)
+
   return(
     <div>
       {hommies.map((hom) => <UserRecord

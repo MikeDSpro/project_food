@@ -7,6 +7,8 @@ import {
   DELETE_HOMMY_SUCCESS, EDIT_HOMMY_SUCCESS,
   CLOSE_DAY_SUCCESS,
   CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS,
+  GET_DAY_AMOUNT, GET_DAY_AMOUNT_SUCCESS, RESET_AMOUNT,
+  SET_AMOUNTS, GET_AMOUNT,
 
 } from "../../constants";
 
@@ -88,3 +90,23 @@ export const saveValue = (params) => {
 export const saveValueSuccess = (params) => {
   return {type: SAVE_VALUE_SUCCESS, payload: params}
 };
+
+export const getDayAmount = (params) => {
+  return {type: GET_DAY_AMOUNT, payload: params}
+};
+
+export const getDayAmountSuccess = (params) => {
+  return {type: GET_DAY_AMOUNT_SUCCESS, payload: params}
+};
+
+export const resetAmount = (params) => {
+  return {type: RESET_AMOUNT, payload: params}
+};
+
+export const setAmounts = (params) => {
+  return {type: SET_AMOUNTS, payload: params}
+};
+
+export const getAmount = (params) => {
+  return {type: GET_AMOUNT, payload: params}
+}
