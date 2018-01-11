@@ -4,6 +4,10 @@ You need docker with mysql image
 See config folder and config.json for database details.
 
 
+Use docker container with mysql. Run command: docker run --name DBNAME -e MYSQL_ROOT_PASSWORD=YOUR-PASS-HERE -d mysql:VERSION-OF-MYSQL
+or create docker compose.yml and describe all needed conf there...
+
+
 type:
     npm run + one the commands:
             "migration:generate": "cd src && sequelize migration:generate" - creates migration file in migration folder

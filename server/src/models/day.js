@@ -10,10 +10,18 @@ const Day = sequelize.define('day', {
   },
   createdAt: {
     type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
+    defaultValue: Sequelize.fn('NOW'),
   },
   dayTotal:{
     type:Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  date: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  updatedAt: {
+    type: Sequelize.DATE
   }
 });
 

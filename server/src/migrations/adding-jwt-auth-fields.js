@@ -1,5 +1,5 @@
-'use strict';
 const bcrypt = require('bcrypt');
+
 const pass = '123';
 const saltRounds = 10;
 
