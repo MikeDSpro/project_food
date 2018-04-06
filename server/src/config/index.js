@@ -1,6 +1,6 @@
 export default {
   port: 3001,
-  JWTSecret: "mysecretkey",
+  jwtsecret: "mysecretkey",
   host: 'localhost',
   dialect: 'mysql',
 };

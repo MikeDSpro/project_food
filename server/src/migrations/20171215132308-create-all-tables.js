@@ -13,13 +13,14 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       discount: {
         type: Sequelize.INTEGER,
         defaultValue: 30,
+      },
+      email:{
+        type: Sequelize.STRING,
+        isEmail: true,
+        unique: true,
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
@@ -49,7 +50,6 @@ module.exports = {
           type: Sequelize.STRING,
           isEmail: true,
           unique: true,
-          primaryKey: true,
         },
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,

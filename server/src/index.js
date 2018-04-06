@@ -11,17 +11,14 @@ import {
   closeDay,
   getOne,
   getAll,
-  health,
   createAmount,
   createOne,
   deleteOne,
-  updateOne
+  updateOne,
+  signUp
 } from './controllers/controller';
 
-const {
-  JWTSecret,
-  port
-} = config;
+const {jwtsecret, port} = config;
 
 const {Hommy, HommieBalance} = models;
 const router = new Router();
@@ -31,6 +28,7 @@ router
   .get('/hommy/:id', getOne)
   .get('/hommy/', getAll)
   .post('/hommy/amount/', createAmount)
+  .post('/auth/signup', signUp)
   .post('/hommy/', createOne)
   .put('/hommy/:id', updateOne)
   .del('/hommy/:id', deleteOne)
@@ -39,7 +37,7 @@ router
 
 app.use(logger());
 app.use(cors());
-app.use(jwt({ secret: JWTSecret }).unless({
+app.use(jwt({ secret: jwtsecret }).unless({
     path: [/^\/auth\/login/]}));
 app.use(bodyParser());
 app.use(router.routes());

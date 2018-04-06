@@ -68,7 +68,6 @@ const Hommy = sequelize.define('hommy', {
     type: Sequelize.STRING,
     isEmail: true,
     unique: true,
-    primaryKey: true,
   },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
