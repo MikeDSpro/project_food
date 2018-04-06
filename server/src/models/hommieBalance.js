@@ -46,7 +46,7 @@ const HommieBalance = sequelize.define('hommieBalance', {
     autoIncrement: true,
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
   },
   hommyId: {
     type: Sequelize.INTEGER,

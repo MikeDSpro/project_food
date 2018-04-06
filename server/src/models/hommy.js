@@ -89,7 +89,7 @@ const Hommy = sequelize.define('hommy', {
 });
 
 Hommy.associate = (models) => {
-  models.Hommy.hasMany(models.hommieBalance);
+  models.Hommy.hasMany(models.HommieBalance);
 };
 
 export default Hommy;
