@@ -10,15 +10,6 @@ import models from '../models';
 
 const {Hommy, HommieBalance} = models;
 
-export function health(ctx) {
-  try{
-    console.log(ctx.body)
-    ctx.body = 'Server is running'
-  }catch (e){
-    ctx.body = 'Error'
-  }
-}
-
 export async function getOne(ctx) {
   try{
     ctx.body = await Hommy.findById(ctx.params.id);
@@ -56,9 +47,9 @@ export async function login(ctx) {
 
 export async function createOne(ctx) {
   try{
-    const hommy = await Hommy.create(ctx.request.body);
-    const {email} = hommy;
-    const lastCreated = await Hommy.findOne({where: {email:email}});
+    const { body } = ctx.request
+    const {email} = await Hommy.create(body);
+    const lastCreated = await Hommy.findOne({where: {email}});
     ctx.body = lastCreated;
   }catch (e){
     ctx.body = "Can't create new Hommmy";
@@ -67,8 +58,10 @@ export async function createOne(ctx) {
 
 export async function updateOne(ctx) {
   try{
-    await Hommy.update(ctx.request.body, {where: {id: `${ctx.request.body.id}`}});
-    const lastUpdated = await Hommy.findOne({where: {id:`${ctx.request.body.id}`}});
+    const {id} = ctx.request.body
+    if (!id) return
+    await Hommy.update(ctx.request.body, {where: {id}});
+    const lastUpdated = await Hommy.findOne({where: {id}});
     ctx.body = lastUpdated;
   }catch(e){
     ctx.body = "Not Found";
@@ -77,7 +70,8 @@ export async function updateOne(ctx) {
 
 export async function deleteOne(ctx) {
   try{
-    ctx.body = await Hommy.destroy({where: {id: ctx.params.id}});
+    const { id } = ctx.params;
+    ctx.body = await Hommy.destroy({where: {id}});
   }catch(e){
     ctx.body = "Not Found";
   }
@@ -89,13 +83,8 @@ export async function createAmount(ctx) {
     const hommies = await Hommy.findAll();
     await Promise.all(hommies.map(async (item) => {
       const balance = await HommieBalance.findOne({where:{ hommyId:item.id, date:currentDate }});
-      /* if(balance && currentDate === date){
-           console.log(' ----------->> Only Update') // todo: new post reques update with new data
-         } */
       if(!balance){
         await HommieBalance.create({hommyId: item.id, amount: 0, date, debt: 0})
-      }else {
-        return;
       }
     }));
 
@@ -116,14 +105,11 @@ export async function closeDay(ctx, next) { // eslint-disable-line
     const reqBody = ctx.request.body;
     const {hommies, date} = reqBody;
     const lastDay = await Day.findOne({where: {date:reqBody.date}});
-    console.log('TEST')
-    hommies.forEach(async (hom) => {
+      hommies.forEach(async (hom) => {
       const lastEntry = await HommieBalance.findOne({where: {userId: hom.id}}); // todo: check which id to match
       if(lastEntry){
-        console.log(lastEntry);
         await lastEntry.update({amount: hom.total, userId:hom.id});
-      } else {
-        console.log('no such user');
+      }else {
         await HommieBalance.create({userId: hom.id, amount: hom.total, date});
       }
     });
