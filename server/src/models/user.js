@@ -22,6 +22,10 @@ const User = sequelize.define('user', {
   hash: {
     type: Sequelize.STRING,
   },
+  discount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 30,
+  },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
 

@@ -1,10 +1,11 @@
-import app from './app';
 import bodyParser from 'koa-bodyparser';
-import router from './routes';
-import jwt from 'koa-jwt'
-import config from './config';
+import jwt from 'koa-jwt';
 import logger from 'koa-logger';
 import cors from 'koa-cors';
+import app from './app';
+import config from './config';
+import router from './routes';
+
 
 app.use(logger());
 app.use(cors());

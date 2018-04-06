@@ -1,11 +1,39 @@
 import React from 'react';
-import UserRecordWithControls from './UserRecordWithControls';
+import {connect} from 'react-redux';
+import {push} from "react-router-redux";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import HommiesList from './HommiesList';
+import {deleteHommy, getAllHommies} from "../../actions";
+import Modal from '../Modal';
+import './styles.css';
 
-const AdminActions = () =>{
 
+class AdminActions extends React.Component{
+
+  componentDidMount = () => {
+    this.props.getAllHommies();
+  };
+
+render(){
+  const {push, deleteHommy, hommies} = this.props;
   return(
-    <label><UserRecordWithControls /></label>
+    <MuiThemeProvider>
+      <div className='wrap'>
+        <h1>Admin's Actions</h1>
+        <Modal/>
+        <RaisedButton onClick = {() => {push('/actions')}}>Go Back</RaisedButton>
+        <HommiesList hommies={hommies}
+                     deleteHommy={deleteHommy}
+        />
+      </div>
+    </MuiThemeProvider>
   )
 }
+}
 
-export default AdminActions;
+const mapStateToProps = ({hommies}) => {
+  return hommies
+};
+
+export default connect(mapStateToProps, {push, deleteHommy, getAllHommies})(AdminActions);

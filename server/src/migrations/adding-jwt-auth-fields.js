@@ -1,5 +1,5 @@
-'use strict';
 const bcrypt = require('bcrypt');
+
 const pass = '123';
 const saltRounds = 10;
 
@@ -18,7 +18,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn('users', 'hash')
       .then(() => {
-      return queryInterface.bulkDelete('users', {id:333})
+      return queryInterface.bulkDelete('users', {id:1})
       })
   },
 };

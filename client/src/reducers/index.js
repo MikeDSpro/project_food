@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import {reducer as reduxFormReducer} from 'redux-form';
+import {reducer as formReducer} from 'redux-form';
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage';
 import login from './user';
-import hommies from './hommies';
+import list from './hommies';
+import total from './total';
+import dayAmount from './dayAmount';
+import {ADD_HOMMY_SUCCESS} from '../../constants';
+import dayReducer from './day';
 
 const config = {
   key: 'root',
@@ -13,13 +17,23 @@ const config = {
 const getHommies = {
   key: 'hommies',
   storage,
-}
+};
 
 const reducer = combineReducers({
-  form: reduxFormReducer,
+  form: formReducer.plugin({                    // Clear form
+    AddHommyForm: (state, action) => {
+      switch(action.type) {
+        case ADD_HOMMY_SUCCESS:
+          return undefined;
+        default:
+          return state;
+      }
+    }
+  }),
   routing: routerReducer,
   setToken: persistReducer(config, login),
-  hommies: persistReducer(getHommies, hommies),
+  hommies: list, // persistReducer(getHommies, list),
+  dayReducer, total, dayAmount,
 });
 
 
