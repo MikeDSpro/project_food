@@ -8,7 +8,7 @@ import {
   CLOSE_DAY_SUCCESS,
   CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS,
   GET_DAY_AMOUNT, GET_DAY_AMOUNT_SUCCESS, RESET_AMOUNT,
-  SET_AMOUNTS, GET_AMOUNT,
+  SET_AMOUNTS, GET_AMOUNT, GET_AMOUNT_SUCCESS,
 
 } from "../../constants";
 
@@ -109,4 +109,8 @@ export const setAmounts = (params) => {
 
 export const getAmount = (params) => {
   return {type: GET_AMOUNT, payload: params}
-}
+};
+
+export const getAmountSuccess = (params) => {
+  return {type: GET_AMOUNT_SUCCESS, payload: params}
+};

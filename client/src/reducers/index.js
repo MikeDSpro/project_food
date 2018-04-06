@@ -6,6 +6,7 @@ import storage from 'redux-persist/es/storage';
 import login from './user';
 import list from './hommies';
 import total from './total';
+import balances from './balances';
 import dayAmount from './dayAmount';
 import {ADD_HOMMY_SUCCESS} from '../../constants';
 import dayReducer from './day';
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   routing: routerReducer,
   setToken: persistReducer(config, login),
   hommies: list, // persistReducer(getHommies, list),
+  hommieBalances: balances,
   dayReducer, total, dayAmount,
 });
 

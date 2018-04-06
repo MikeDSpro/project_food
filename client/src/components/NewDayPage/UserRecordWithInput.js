@@ -5,31 +5,21 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserRecord from './UserRecord___';
 
 
-
 class UserRecordWithInput extends React.Component{
-
-  state = {value: this.props.defValue || 0,
-          };
-
-
   render(){
-
-    const {defVal, changeValue, reset} = this.props;
-    const {value} = this.state;
-
+    const {firstName, lastName, value} = this.props;
 
   return(
     <MuiThemeProvider>
     <div style={{display:'flex', marginBottom: '10px'}}>
       <div className='list_element'>
       <UserRecord
-        firstName = {this.props.firstName}
-        lastName={this.props.lastName}
+        firstName={firstName}
+        lastName={lastName}
       />
       </div>
-
       <NumericInput
-        onChange={(target) => {changeValue(target, this.props.id ); this.setState({value: target})}}
+        onChange={this.props.onChange}
         mobile
         min={0} max={100} value={value}
         size={1}
@@ -68,11 +58,10 @@ class UserRecordWithInput extends React.Component{
           }}
         }
       />
-      <RaisedButton style={{ marginLeft: '10px', boxShadow:'none'}} primary onClick={() => {this.setState({value: 0}); reset(value)  }}>Reset</RaisedButton>
     </div>
     </MuiThemeProvider>
   );
   }
-};
+}
 
 export default UserRecordWithInput;
