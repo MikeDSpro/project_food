@@ -1,11 +1,15 @@
 import Sequelize from 'sequelize';
+import config from './config';
 
-const sequelize = new Sequelize('food', 'root', 'qwerty', {
-  host: 'localhost',
-  dialect: 'mysql',
+const {
+  host,
+  dialect
+} = config;
+
+export default new Sequelize('food', 'root', 'qwerty', {
+  host,
+  dialect,
 });
-export default sequelize;
-
 
 //  this will put a foreign key for hommyId in the HommieBalance model
 //  and give Hommy .setHommieBalance() and .getHommieBalance() instance methods

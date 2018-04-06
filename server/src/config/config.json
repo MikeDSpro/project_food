@@ -3,7 +3,7 @@
     "username": "root",
       "password": "qwerty",
       "database": "food",
-      "host": "0.0.0.0",
+      "host": "127.0.0.1",
       "dialect": "mysql",
       "port": "3306"
   },
@@ -11,7 +11,7 @@
     "username": "root",
       "password": "qwerty",
       "database": "food",
-      "host": "0.0.0.0",
+      "host": "127.0.0.1",
       "dialect": "mysql"
   },
   "production": {

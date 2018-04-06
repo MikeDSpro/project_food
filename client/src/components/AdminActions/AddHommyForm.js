@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm, } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import { push } from 'react-router-redux';
 import {connect} from 'react-redux';
@@ -12,7 +12,7 @@ import validate from '../LoginForm/validate';
 import { addHommy } from '../../actions';
 
 
-const renderTextField = ({
+export const renderTextField = ({
                            input,
                            label,
                            meta: { touched, error },
@@ -24,7 +24,7 @@ const renderTextField = ({
     errorText={touched && error}
     {...input}
     {...custom}
-  />
+  />;
 
 
 const AddHommyForm = (props) => {

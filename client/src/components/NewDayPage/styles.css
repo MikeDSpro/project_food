@@ -40,8 +40,6 @@
 }
 
 .wrap form {
-  background-color: rgb(240, 240, 240);
-  width: 280px;
   padding: 0px 10px 10px 10px;
 }
 
@@ -60,4 +58,8 @@
 .list_element {
   align-self:flex-end;
   width: 350px;
+}
+
+.react-numeric-input{
+  width: 100px;
 }

@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy, closeNewDay, getAmount} from '../api/requests';
 import {
   getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess,
-  editHommySuccess, closeDaySuccess, getDayAmountSuccess,
+  editHommySuccess, closeDaySuccess, getDayAmountSuccess, getAmountSuccess,
 } from '../actions';
 import {
   GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY,
@@ -70,9 +70,7 @@ function* deleteOneHommy({payload}) {
 
 function* dayClose({payload}) {
   try{
-
    const response = yield call(closeNewDay, payload);
-
   }catch (e){
     // todo:
   }
@@ -80,11 +78,11 @@ function* dayClose({payload}) {
 
 function* getHommiesAmount({payload}) {
   try{
-    const response = yield call(getAmount, payload);
-    console.log(response)
+    const {data} = yield call(getAmount, payload);
+    yield put(getAmountSuccess(data));
 
   }catch(e){
-    console.log(e)
+    console.log('ERROR:',e)
   }
 }
 

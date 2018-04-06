@@ -1,31 +1,25 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import {push} from "react-router-redux";
-import moment from 'moment';
 import RaisedButton from 'material-ui/RaisedButton';
+import moment from 'moment';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {changeValue, closeDay, saveValue, resetAmount, getAmount, getAllHommies} from '../../actions';
+import {closeDay, getAmount, getAllHommies} from '../../actions';
 import HommiesList from './HommiesList';
 import './styles.css';
 
 
 class NewDayList extends React.Component {
 
-   state = {
-    hommies: this.props.hommies
-  };
+  componentDidMount = () => {
+    this.props.getAmount({
+      date: this.getDate(),
 
-   componentDidMount = () => {
-     this.props.getAllHommies();
-     this.props.getAmount({
-       date: this.getDate(),
-       hommies: this.props.hommies
-     });
-   };
+    });
+  };
 
   getDate = () => {
     return moment().format("YYYY-MM-DD");
-    // return new Date().toJSON().slice(0,10).replace(/-/g,'/');
   };
 
   handleClose = () => {
@@ -34,27 +28,31 @@ class NewDayList extends React.Component {
     dayTotal:this.props.total,
     date: this.getDate(),
     hommies: this.props.hommies});
-   };
+  };
+
+  resetValue = () => {
+    console.log('===>', "RESET")
+  };
 
   render(){
-  const {hommies, total, changeValue, push, resetAmount, amounts} = this.props;
-  console.log(this.props);
+  const {push, resetAmount, balances} = this.props;
+
+    const initialValues = balances.reduce((acc, currentVal) => {
+      return {...acc, [currentVal.id]: currentVal.hommieBalances[0].amount}
+    },{});
+
   return(
     <MuiThemeProvider>
       <div className='wrap'>
         <h2>Today's Food Order</h2>
         <h4>{this.getDate()}</h4>
-        <RaisedButton onClick={() => push('/actions')}>Go Back</RaisedButton>
+        <RaisedButton
+          onClick={() => push('/actions')}>Go Back</RaisedButton>
         <HommiesList
-
-          hommies ={hommies}
-          changeValue = {changeValue}
-          saveValue={saveValue}
-          reset={resetAmount}
+          hommiesWithBalances={balances}
+          reset={this.resetValue}
         />
-        <div className='total'>Total: <span>{total}</span></div>
-        <RaisedButton onClick={() => this.handleClose()} primary >Save Day </RaisedButton>
-        <RaisedButton primary >Reset All </RaisedButton>
+        <div className='total'>Total: <span>{0}</span></div>
       </div>
     </MuiThemeProvider>
   );
@@ -62,19 +60,17 @@ class NewDayList extends React.Component {
 
 const mapDispatchToProps = {
   getAllHommies,
-  changeValue,
   closeDay,
-  saveValue,
-  resetAmount,
   getAmount,
   push
 };
 
-const mapStateToProps = ({hommies, dayReducer, total, dayAmount}) => ({
+const mapStateToProps = ({hommies, dayReducer, total, dayAmount, hommieBalances}) => ({
     hommies: hommies.hommies,
-    amounts: dayAmount,
-    total: total.Gtotal,
-    days: dayReducer,
+    // amounts: dayAmount,
+    // total: form.Balances.values.reduce((a, c) => a + c, 0),
+    // days: dayReducer,
+    balances: hommieBalances.balances,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewDayList);
