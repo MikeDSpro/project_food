@@ -2,19 +2,38 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import moment from "moment/moment";
 import Sequelize from "sequelize";
-import jwtsecret from "../config";
+import config from "../config";
 import User from "../models/user";
 import Day from "../models/day";
 import models from '../models';
 
 
+const saltRounds = 10;
 const {Hommy, HommieBalance} = models;
+const { jwtsecret } = config;
 
 export async function getOne(ctx) {
   try{
     ctx.body = await Hommy.findById(ctx.params.id);
   }catch(e){
     ctx.body = "Not Found";
+  }
+}
+
+export async function signUp(ctx) {
+  try{
+    const { body } = ctx.request;
+    if(!body) throw new Error('Bad data provided by user');
+    const existingUser = await User.findOne({where:{email: body.email}});
+    if(existingUser) throw new Error('Such user already exists');
+    const hash = await bcrypt.hash(body.password, saltRounds);
+    body.hash = hash;
+    ctx.body = await User.create(body)
+    // const {email} = await User.create(body);
+    // const lastCreated = await User.findOne({where: {email}});
+    // ctx.body = lastCreated;
+  }catch (e){
+    ctx.body = e.message;
   }
 }
 
@@ -47,7 +66,7 @@ export async function login(ctx) {
 
 export async function createOne(ctx) {
   try{
-    const { body } = ctx.request
+    const { body } = ctx.request;
     const {email} = await Hommy.create(body);
     const lastCreated = await Hommy.findOne({where: {email}});
     ctx.body = lastCreated;
@@ -58,7 +77,7 @@ export async function createOne(ctx) {
 
 export async function updateOne(ctx) {
   try{
-    const {id} = ctx.request.body
+    const {id} = ctx.request.body;
     if (!id) return
     await Hommy.update(ctx.request.body, {where: {id}});
     const lastUpdated = await Hommy.findOne({where: {id}});

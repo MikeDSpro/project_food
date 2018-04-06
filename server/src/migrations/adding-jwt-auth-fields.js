@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const pass = '123';
+// const pass = '123';
 const saltRounds = 10;
 
 
@@ -10,10 +10,10 @@ module.exports = {
       type: Sequelize.STRING,
       unique: true,
     },)
-      .then(() => bcrypt.hash(pass, saltRounds))
-      .then(hash => queryInterface.bulkInsert('users', [{
-        id: 1, firstName: "Admin", lastName: 'Admin', discount: 30, password: pass, hash}])
-      )
+      // .then(() => bcrypt.hash(pass, saltRounds))
+      // .then(hash => queryInterface.bulkInsert('users', [{
+      //   id: 1, firstName: "Admin", lastName: 'Admin', discount: 30, password: pass, hash}])
+      // )
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn('users', 'hash')
