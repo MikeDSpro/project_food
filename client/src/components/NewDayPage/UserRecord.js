@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import Avatar from 'material-ui/Avatar';
 import {List, ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import RaisedButton from 'material-ui/RaisedButton';
-
 import ReactModal from 'react-modal';
 import UserData from './UserData';
 import './styles.css';

@@ -13,7 +13,7 @@ class UserRecord extends React.Component {
   closeDialogOnDelete = () => {
     this.props.deleteHommy();
     this.simpleDialog.hide();
-  }
+  };
 
   render(){
     return(

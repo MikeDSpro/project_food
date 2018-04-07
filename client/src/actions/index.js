@@ -9,8 +9,13 @@ import {
   CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS,
   GET_DAY_AMOUNT, GET_DAY_AMOUNT_SUCCESS, RESET_AMOUNT,
   SET_AMOUNTS, GET_AMOUNT,
+  SIGNUP
 
 } from "../../constants";
+
+export const signUp = (params) => {
+  return {type: SIGNUP, payload: params}
+};
 
 export const getToken = (params) => {
   return {type: GET_TOKEN, payload: params}
