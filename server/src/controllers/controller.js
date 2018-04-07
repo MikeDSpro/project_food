@@ -45,13 +45,13 @@ export async function getAll(ctx) {
 
 export async function login(ctx) {
   try {
-    const admin = await User.findOne({where: {firstName: ctx.request.body.firstName}});
-    if (!admin) throw new Error('No such user');
-    const isPasswordValid = await bcrypt.compare(ctx.request.body.password, admin.hash);
+    const user = await User.findOne({where: {email: ctx.request.body.email}});
+    if (!user) throw new Error('No such user');
+    const isPasswordValid = await bcrypt.compare(ctx.request.body.password, user.hash);
     if (!isPasswordValid) throw new Error("Password is invalid");
     const jsonToken = {
       token: jwt.sign({
-        user: admin
+        user: user
       }, jwtsecret)
     };
     ctx.body = jsonToken.token;

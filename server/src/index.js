@@ -23,7 +23,7 @@ const {jwtsecret, port} = config;
 const {Hommy, HommieBalance} = models;
 const router = new Router();
 const attributes = ['id', 'hommyId', 'date', 'debt', 'amount'];
-
+const unprotected = [/^\/auth\/login/, /^\/auth\/signup/];
 router
   .get('/hommy/:id', getOne)
   .get('/hommy/', getAll)
@@ -38,7 +38,7 @@ router
 app.use(logger());
 app.use(cors());
 app.use(jwt({ secret: jwtsecret }).unless({
-    path: [/^\/auth\/login/]}));
+    path: unprotected}));
 app.use(bodyParser());
 app.use(router.routes());
 
