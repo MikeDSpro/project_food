@@ -33,14 +33,17 @@ const LoginForm = props => {
     <MuiThemeProvider>
       <div className = 'wrap'>
         <form onSubmit={ handleSubmit }>
+          {/*<div className='input_field'>*/}
+            {/*<Field name="firstName" component={renderTextField} label="First Name" />*/}
+          {/*</div>*/}
+          {/*<div className='input_field'>*/}
+            {/*<Field name="lastName" component={renderTextField} label="Last Name" />*/}
+          {/*</div>*/}
           <div className='input_field'>
-            <Field name="firstName" component={renderTextField} label="First Name" />
+            <Field type="email" name="email" component={renderTextField} label="Email" />
           </div>
           <div className='input_field'>
-            <Field name="lastName" component={renderTextField} label="Last Name" />
-          </div>
-          <div className='input_field'>
-            <Field type="password" name="password" component={renderTextField} label="Password" />
+            <Field type="password" name="password" component={renderTextField} label="Password" autoComplete="current-password" />
           </div>
           <div className='submit_button'>
             {error && <strong>{error}</strong>}
