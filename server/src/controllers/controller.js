@@ -29,9 +29,6 @@ export async function signUp(ctx) {
     const hash = await bcrypt.hash(body.password, saltRounds);
     body.hash = hash;
     ctx.body = await User.create(body)
-    // const {email} = await User.create(body);
-    // const lastCreated = await User.findOne({where: {email}});
-    // ctx.body = lastCreated;
   }catch (e){
     ctx.body = e.message;
   }
