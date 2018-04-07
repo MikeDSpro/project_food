@@ -30,10 +30,8 @@ ReactDOM.render(
           <Route path="/actions/newday" component={NewDayList} />
           <Route path="/actions/reports" component={Reports} />
           <Route path="/actions/admin" component={AdminActions} />
-     
-      </Switch>
+       </Switch>
       </div>
     </ConnectedRouter >
-
   </Provider>
   </PersistGate>, document.getElementById('root'));

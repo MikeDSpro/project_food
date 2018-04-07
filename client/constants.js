@@ -35,5 +35,5 @@ export const GET_AMOUNT_SUCCESS = "GET_AMOUNT_SUCCESS";
 
 export const SET_AMOUNTS = "SET_AMOUNTS";
 
-
+export const SIGNUP = "SIGNUP";
 
