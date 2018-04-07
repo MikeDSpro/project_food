@@ -1,0 +1,30 @@
+.input_field{
+  height: 82px;
+}
+
+.submit_button{
+  margin-top: 20px;
+}
+
+.wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  
+}
+
+.wrap form {
+  margin-top: 20px;
+  padding: 10px 10px 10px 20px;
+}
+
+.nav__link{
+  text-decoration: none;
+  font-family: "Source Sans Pro Black";
+  margin: 10px;
+}
+
+.nav__link:hover{
+  color: Black;
+}

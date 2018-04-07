@@ -16,22 +16,26 @@ import NewDayList from './components/NewDayPage/NewDayList';
 import AdminActions from './components/AdminActions/AdminActions';
 import Reports from './components/Reports/Reports';
 import Layout from './components/Layout/Layout';
+import Home from './components/HomePage/Home';
+import SignUpPage from "./components/SignUpPage/SignUpPage";
 // const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <PersistGate persistor={persistor}>
-  <Provider store ={store}>
-
-    <ConnectedRouter history={history}>
-    <div>
-      <Switch>
-          <Route exact path="/" component={Layout}/>
-          <Route exact path="/actions" component={ActionsPage} />
-          <Route path="/actions/newday" component={NewDayList} />
-          <Route path="/actions/reports" component={Reports} />
-          <Route path="/actions/admin" component={AdminActions} />
-       </Switch>
-      </div>
-    </ConnectedRouter >
-  </Provider>
+    <Provider store ={store}>
+      <ConnectedRouter history={history}>
+        <div>
+          <Switch>
+            {/*<Route exact path="/" component={Layout}/>*/}
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/auth/login" component={Layout}/>
+            <Route exact path="/auth/signup" component={SignUpPage}/>
+            <Route exact path="/actions" component={ActionsPage} />
+            <Route path="/actions/newday" component={NewDayList} />
+            <Route path="/actions/reports" component={Reports} />
+            <Route path="/actions/admin" component={AdminActions} />
+          </Switch>
+        </div>
+      </ConnectedRouter>
+    </Provider>
   </PersistGate>, document.getElementById('root'));

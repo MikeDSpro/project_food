@@ -24,10 +24,8 @@ const renderTextField = ({
     errorText={touched && error}
     {...input}
     {...custom}
-  />
+  />;
   
-
-
 const LoginForm = props => {
   const { handleSubmit, pristine, reset, submitting, error, token } = props;
   return (
@@ -58,7 +56,7 @@ const LoginForm = props => {
 
 const fromDecoratorForm = reduxForm({
   form: 'LoginForm',
-  onSubmit: (values, dispatch) => dispatch(getToken(values)), //  Check action
+  onSubmit: (values, dispatch) => dispatch(getToken(values)),
   validate,
 })(LoginForm);
 
