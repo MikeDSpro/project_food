@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import { push } from 'react-router-redux';
 import {connect} from 'react-redux';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

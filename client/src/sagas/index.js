@@ -1,14 +1,14 @@
 import { call, put, takeEvery, takeLatest, select, fork} from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
-import { login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy, closeNewDay, getAmount} from '../api/requests';
+import { login, getAllHommies, addHommy, deleteHommy, editHommyApi, getHommy, closeNewDay, getAmount, signUpApi} from '../api/requests';
 import {
   getTokenSuccess, getTokenFail, getAllHommiesSuccess, getAllHommiesFail, addHommySuccess, deleteHommySuccess,
-  editHommySuccess, closeDaySuccess, getDayAmountSuccess, getAmountSuccess,
+  editHommySuccess, closeDaySuccess, getDayAmountSuccess, getAmountSuccess, signUp, signUpFail, signUpSuccess
 } from '../actions';
 import {
   GET_TOKEN, GET_ALL_HOMMIES, ADD_HOMMY, DELETE_HOMMY,
-  EDIT_HOMMY, CLOSE_DAY, GET_AMOUNT,
+  EDIT_HOMMY, CLOSE_DAY, GET_AMOUNT, SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL
 } from '../../constants';
 
 
@@ -20,6 +20,15 @@ function* receiveToken({ payload }) {
     yield put(push('/actions'));
   }catch(e){
     yield put (getTokenFail(e));
+  }
+}
+
+function* newUserRegister ({payload}) {
+  try{
+    console.log(payload);
+    const response = yield call(signUpApi, payload)
+  }catch (e){
+
   }
 }
 
@@ -108,6 +117,7 @@ function* rootSaga() {
     takeLatest(EDIT_HOMMY, hommyEdit),
     takeLatest(CLOSE_DAY, dayClose),
     takeLatest(GET_AMOUNT, getHommiesAmount),
+    takeLatest(SIGNUP, newUserRegister),
      ]
 }
 

@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './styles.css';
 import validate from './validate';
-import { getToken } from '../../actions';
+import { signUp } from '../../actions';
 
 
 const renderTextField = ({
@@ -60,10 +60,9 @@ const SignUpForm = props => {
 
 const fromDecoratorForm = reduxForm({
   form: 'SignUpForm',
-  // onSubmit: (values, dispatch) => dispatch(getToken(values)),
+   onSubmit: (values, dispatch) => dispatch(signUp(values)),
   validate,
-  onSubmit: () => console.log('reg')
-})(SignUpForm);
+ })(SignUpForm);
 
 
 const mapDispatchToProps = {

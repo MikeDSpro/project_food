@@ -9,14 +9,10 @@ import {
   CLOSE_DAY, SAVE_VALUE, SAVE_VALUE_SUCCESS,
   GET_DAY_AMOUNT, GET_DAY_AMOUNT_SUCCESS, RESET_AMOUNT,
   GET_AMOUNT,
-  SIGNUP,
+  SIGNUP, SIGNUP_FAIL, SIGNUP_SUCCESS,
   SET_AMOUNTS, GET_AMOUNT_SUCCESS,
 
 } from "../../constants";
-
-export const signUp = (params) => {
-  return {type: SIGNUP, payload: params}
-};
 
 export const getToken = (params) => {
   return {type: GET_TOKEN, payload: params}
@@ -119,4 +115,16 @@ export const getAmount = (params) => {
 
 export const getAmountSuccess = (params) => {
   return {type: GET_AMOUNT_SUCCESS, payload: params}
+};
+
+export const signUp = (params) => {
+  return {type: SIGNUP, payload: params}
+};
+
+export const signUpFail = (error) =>{
+  return {type: SIGNUP, payload: error}
+};
+
+export const signUpSuccess = (params) =>{
+  return {type: SIGNUP, payload: params}
 };
