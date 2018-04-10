@@ -38,5 +38,4 @@ const reducer = combineReducers({
   dayReducer, total, dayAmount,
 });
 
-
 export default reducer;

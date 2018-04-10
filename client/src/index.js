@@ -15,9 +15,10 @@ import LoginForm from './components/LoginForm/LoginForm';
 import NewDayList from './components/NewDayPage/NewDayList';
 import AdminActions from './components/AdminActions/AdminActions';
 import Reports from './components/Reports/Reports';
-import Layout from './components/Layout/Layout';
+import LoginLayout from './components/Layout/LoginLayout';
 import Home from './components/HomePage/Home';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
+import UserCreated from './components/UserCreated/UserCreated';
 // const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
@@ -26,14 +27,14 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <div>
           <Switch>
-            {/*<Route exact path="/" component={Layout}/>*/}
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/auth/login" component={Layout}/>
-            <Route exact path="/auth/signup" component={SignUpPage}/>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/auth/login" component={LoginLayout} />
+            <Route exact path="/auth/signup" component={SignUpPage} />
             <Route exact path="/actions" component={ActionsPage} />
             <Route path="/actions/newday" component={NewDayList} />
             <Route path="/actions/reports" component={Reports} />
             <Route path="/actions/admin" component={AdminActions} />
+            <Route path="/usercreated" component={UserCreated} />
           </Switch>
         </div>
       </ConnectedRouter>

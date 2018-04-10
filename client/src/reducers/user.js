@@ -4,7 +4,8 @@ import {GET_TOKEN_SUCCESS, GET_TOKEN_FAIL, USER_LOGOUT} from '../../constants';
 
 const getToken = (state = { token: null }, action) => {
   switch (action.type) {
-    case GET_TOKEN_SUCCESS: console.log(action.payload); return {...state, token:action.payload };
+    case GET_TOKEN_SUCCESS: return {
+      ...state, token:action.payload };
 
     default: return state;
   }

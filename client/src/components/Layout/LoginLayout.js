@@ -5,11 +5,11 @@ import LoginFormWithRouter from '../LoginForm/LoginFormWithRouter';
 import ActionsPage from '../ActionsPage/ActionsPage';
 
 
-const Layout = ({token}) => {
+const LoginLayout = ({token}) => {
   return(
-    !token ? (<LoginFormWithRouter/>) : (<ActionsPage/>)
-  )
+     !token ? (<LoginFormWithRouter/>) : (<ActionsPage/>)
+    )
 };
 
 export default withRouter(connect(state => ({
-  token:state.setToken.token}))(Layout));
+  token: state.setToken.getToken.token}))(LoginLayout));

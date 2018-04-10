@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import {connect} from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {NavLink} from 'react-router-dom';
 
 import './styles.css';
 import validate from './validate';
@@ -51,6 +52,7 @@ const LoginForm = props => {
             </RaisedButton>
           </div>
         </form>
+        <NavLink className="nav__link" to='/'>Back to home page</NavLink>
       </div>
     </MuiThemeProvider>
   )

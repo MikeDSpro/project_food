@@ -27,6 +27,7 @@ function* newUserRegister ({payload}) {
   try{
     console.log(payload);
     const response = yield call(signUpApi, payload)
+    yield put(push('/usercreated'));
   }catch (e){
 
   }
